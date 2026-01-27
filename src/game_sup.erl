@@ -31,7 +31,13 @@ init([]) ->
         intensity => 0,
         period => 1
     },
-    ChildSpecs = [],
+    ChildSpecs = [
+        #{
+            id => game_engine,
+            start => {game_engine, start_link, []},
+            restart => permanent
+        }
+    ],
     {ok, {SupFlags, ChildSpecs}}.
 
 %% internal functions
