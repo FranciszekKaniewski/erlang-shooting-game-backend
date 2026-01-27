@@ -12,8 +12,10 @@ websocket_init(State) ->
     {ok, State}.
 
 websocket_handle({text, Msg}, State) ->
-    io:format("Gracz (~p) przyslal: ~p~n", [self(), Msg]),
-    {reply, {text, <<"Odebrano!">>}, State};
+    Data = jsx:decode(Msg, [return_maps]),
+
+    io:format("Gracz (~p) przyslal: ~p | ~p~n", [self(), maps:get(<<"type">>, Data), maps:get(<<"dir">>, Data)]),
+    {reply, {text, <<"Ok!">>}, State};
 websocket_handle(_Data, State) ->
     {ok, State}.
 
