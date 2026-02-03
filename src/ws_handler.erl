@@ -19,7 +19,9 @@ websocket_handle({text, Msg}, State) ->
             Dir = maps:get(<<"dir">>, Data),
             game_engine:player_move(self(), Dir),
             {ok, State};
-            
+        <<"shoot">> ->
+            game_engine:player_shoot(self()),
+            {ok, State};
         _ ->
             {ok, State}
     end;
