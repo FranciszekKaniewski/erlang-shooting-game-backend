@@ -34,7 +34,7 @@ websocket_info({send_json, Map}, State) ->
     {reply, {text, Json}, State};
 
 websocket_info(kill_socket, State) ->
-    {stop, normal, State};
+    {stop, State};
 
 websocket_info(_Info, State) ->
     {ok, State}.
